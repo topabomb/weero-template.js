@@ -1,6 +1,6 @@
 {
   "name": "weero-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "keywords": [
     "weero.net",
@@ -18,7 +18,7 @@
     "dev": "nodemon --ext \".ts,.js\" --watch \"./src\"  --exec \"ts-node  ./src/index.ts",
     "rollup:dev": "rollup -c --configPlugin typescript -w --watch.onEnd=\"node ./dist/index.js\"",
     "dist": "rollup -c --configPlugin typescript",
-    "publish": "npm run dist && npm publish"
+    "npmjs": "npm run dist && npm publish"
   },
   "author": "topabomb (hualei.hb@gmail.com)",
   "license": "ISC",

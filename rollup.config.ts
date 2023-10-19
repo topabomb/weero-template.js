@@ -16,12 +16,12 @@ export default [
     ],
     plugins: [
       cleandir("./dist"),
-      /*
+
       nodeResolve({
         extensions: [".ts", ".mjs", ".js", ".json", ".node"],
         exportConditions: ["node"],
         preferBuiltins: false,
-      }),*/
+      }),
       typescript({ compilerOptions: { module: "ESNext" } }), //override tsonfig.json->compilerOptions.module=CommonJS
       commonjs({ requireReturnsDefault: "auto" }),
       json(),
