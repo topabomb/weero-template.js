@@ -2,6 +2,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import { cleandir } from "rollup-plugin-cleandir";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
+import versionInjector from "rollup-plugin-version-injector";
 import json from "@rollup/plugin-json";
 export default [
   {
@@ -25,6 +26,7 @@ export default [
       typescript({ compilerOptions: { module: "ESNext" } }), //override tsonfig.json->compilerOptions.module=CommonJS
       commonjs({ requireReturnsDefault: "auto" }),
       json(),
+      versionInjector({ injectInComments: false }),
     ],
   },
 ];

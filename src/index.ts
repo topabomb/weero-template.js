@@ -19,6 +19,7 @@ const commands = [
 cli.initialize(commands, {
   author: "topabomb(hualei.hb@gmail.com)",
   description: "node console app.",
+  version: "[VI]{version} - {date}[/VI]", //from rollup-plugin-version-injector
 });
 cli.command("simple_console_project", async ({ name, args, logger }) => {
   const path = resolve(`${resolve(args["dir"])}/${args["name"]}`);
@@ -35,12 +36,18 @@ cli.command("simple_console_project", async ({ name, args, logger }) => {
     else doContinue = false;
   }
   if (doContinue && !existsSync(path)) {
-    (await instanceOf("node-consoleapp-simple")).execute(
-      args["name"],
-      path,
-      args["url"]
-    );
-    logger.info(`project(${args["name"]}),path(${path}) created.`);
+    try {
+      await (
+        await instanceOf("node-consoleapp-simple")
+      ).execute(args["name"], path, args["url"]);
+      logger.info(`project(${args["name"]}),path(${path}) created.`);
+    } catch (err) {
+      logger.error(
+        `Delete the created folder due to execution failure!dir(${path}),err:(${err.message})`
+      );
+      rmSync(path, { recursive: true });
+      throw err;
+    }
   }
 });
 void cli.run();
